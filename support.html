@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Техподдержка - BrawlCraft</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #0a58ca;
+            --primary-yellow: #ffcc00;
+            --primary-red: #e63946;
+            --dark-bg: #121212;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark-bg);
+            color: white;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(to right, var(--primary-blue), var(--primary-red));
+            padding: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-icon {
+            font-size: 2.5rem;
+            color: var(--primary-yellow);
+            text-shadow: 3px 3px 0 #000;
+        }
+        
+        .logo-text {
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(to right, var(--primary-yellow), white);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 2px 2px 0 #000;
+        }
+        
+        .back-button {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 10px 20px;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        
+        .back-button:hover {
+            background-color: rgba(0, 0, 0, 0.5);
+            transform: translateY(-3px);
+        }
+        
+        .page-header {
+            padding: 80px 0 40px;
+            text-align: center;
+        }
+        
+        .page-header h1 {
+            font-size: 3rem;
+            color: var(--primary-yellow);
+            margin-bottom: 20px;
+        }
+        
+        .page-header p {
+            font-size: 1.2rem;
+            color: #ccc;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .support-section {
+            padding: 40px 0 80px;
+        }
+        
+        .contact-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .contact-card {
+            background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .contact-icon {
+            font-size: 3rem;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+        }
+        
+        .contact-card h3 {
+            font-size: 1.8rem;
+            color: var(--primary-yellow);
+            margin-bottom: 15px;
+        }
+        
+        .contact-card p {
+            color: #ddd;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .contact-link {
+            display: inline-block;
+            background: linear-gradient(to right, var(--primary-blue), var(--primary-red));
+            color: white;
+            padding: 10px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .contact-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .troubleshooting {
+            background: linear-gradient(to right, var(--primary-blue), var(--primary-red));
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 50px;
+        }
+        
+        .troubleshooting h2 {
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            text-align: center;
+            color: white;
+        }
+        
+        .problem-item {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .problem-item h3 {
+            font-size: 1.4rem;
+            color: var(--primary-yellow);
+            margin-bottom: 10px;
+        }
+        
+        .problem-item p {
+            color: #ddd;
+            line-height: 1.8;
+        }
+        
+        .support-form {
+            background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .support-form h2 {
+            font-size: 2.2rem;
+            color: var(--primary-yellow);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #fff;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            color: white;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-button {
+            background: linear-gradient(to right, var(--primary-blue), var(--primary-red));
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: block;
+            margin: 30px auto 0;
+        }
+        
+        .submit-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        footer {
+            background-color: #0a0a0a;
+            padding: 40px 0 20px;
+            border-top: 5px solid var(--primary-blue);
+            text-align: center;
+        }
+        
+        .copyright {
+            color: #aaa;
+            font-size: 0.9rem;
+            margin-top: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .contact-methods {
+                grid-template-columns: 1fr;
+            }
+            
+            .troubleshooting,
+            .support-form {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <div class="logo-text">BrawlCraft</div>
+                </div>
+                <a href="index.html" class="back-button"><i class="fas fa-arrow-left"></i> На главную</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="page-header">
+        <div class="container">
+            <h1>Техподдержка</h1>
+            <p>Если у вас возникли проблемы с сервером BrawlCraft, вы находитесь в правильном месте</p>
+        </div>
+    </div>
+
+    <div class="support-section">
+        <div class="container">
+            <div class="contact-methods">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fab fa-discord"></i>
+                    </div>
+                    <h3>Discord сервер</h3>
+                    <p>Присоединяйтесь к нашему Discord сообществу для быстрой помощи, общения с другими игроками и получения актуальных новостей.</p>
+                    <a href="https://discord.gg/brawlcraft" target="_blank" class="contact-link">Присоединиться</a>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Электронная почта</h3>
+                    <p>Напишите нам на почту, и мы ответим в течение 24 часов. Идеально для сложных вопросов и подробных описаний проблем.</p>
+                    <a href="mailto:support@brawlcraft.ru" class="contact-link">Написать письмо</a>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>Чат в игре</h3>
+                    <p>Обратитесь к онлайн-администраторам прямо в игре. Наиболее быстрый способ получить помощь по текущим проблемам.</p>
+                    <p class="contact-link" style="background: #555; cursor: default;">Используйте /help в игре</p>
+                </div>
+            </div>
+            
+            <div class="troubleshooting">
+                <h2>Частые проблемы и решения</h2>
+                
+                <div class="problem-item">
+                    <h3>Не могу подключиться к серверу</h3>
+                    <p><strong>Решение:</strong> Убедитесь, что вы используете версию Minecraft 1.16-1.20. Проверьте правильность ввода адреса сервера: <strong>play.brawlcraft.ru</strong>. Перезагрузите Minecraft и проверьте интернет-соединение.</p>
+                </div>
+                
+                <div class="problem-item">
+                    <h3>Сервер лагает или высокая задержка</h3>
+                    <p><strong>Решение:</strong> Проверьте скорость вашего интернет-соединения. Убедитесь, что на вашем компьютере достаточно ресурсов. Попробуйте снизить настройки графики в Minecraft. Если проблема не исчезает, обратитесь в техподдержку.</p>
+                </div>
+                
+                <div class="problem-item">
+                    <h3>Не загружаются ресурсы сервера</h3>
+                    <p><strong>Решение:</strong> Дождитесь полной загрузки ресурс-пака (это может занять несколько минут). Убедитесь, что в настройках Minecraft разрешена загрузка серверных ресурсов. Переподключитесь к серверу.</p>
+                </div>
+                
+                <div class="problem-item">
+                    <h3>Не работает чат или команды</h3>
+                    <p><strong>Решение:</strong> Убедитесь, что у вас нет мута. Проверьте, не заблокирован ли чат в настройках Minecraft. Переподключитесь к серверу. Если проблема остается, обратитесь к администратору.</p>
+                </div>
+            </div>
+            
+            <div class="support-form">
+                <h2>Форма обращения в поддержку</h2>
+                <form id="supportForm">
+                    <div class="form-group">
+                        <label for="name">Ваше имя или никнейм:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Электронная почта:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="category">Категория проблемы:</label>
+                        <select id="category" name="category" required>
+                            <option value="">Выберите категорию</option>
+                            <option value="connection">Проблемы с подключением</option>
+                            <option value="performance">Лаги и производительность</option>
+                            <option value="gameplay">Игровые проблемы</option>
+                            <option value="account">Проблемы с аккаунтом</option>
+                            <option value="payment">Вопросы по донату</option>
+                            <option value="other">Другое</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Подробное описание проблемы:</label>
+                        <textarea id="message" name="message" placeholder="Опишите проблему как можно подробнее. Укажите, когда она появилась, что вы делали до её возникновения, и какие шаги по устранению уже предприняли..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-button">Отправить обращение</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="copyright">
+                <p>&copy; 2023 BrawlCraft. Все права защищены. Этот сервер не аффилирован с Mojang Studios или Supercell.</p>
+                <p>Minecraft и Brawl Stars являются товарными знаками соответствующих правообладателей.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Обработка формы техподдержки
+        document.getElementById('supportForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Здесь обычно отправка данных на сервер
+            // В этом примере просто показываем сообщение
+            alert('Спасибо за обращение! Мы получили ваше сообщение и ответим в ближайшее время.');
+            
+            // Очистка формы
+            this.reset();
+        });
+    </script>
+</body>
+</html>

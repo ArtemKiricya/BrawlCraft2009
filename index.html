@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrawlCraft - Brawl Stars в Minecraft</title>
+    
+    <!-- ФАВИКОНКА САЙТА -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👑</text></svg>">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #0a58ca;
+            --primary-yellow: #ffcc00;
+            --primary-red: #e63946;
+            --minecraft-green: #55aa55;
+            --minecraft-dark: #2d2d2d;
+            --minecraft-dirt: #8b7355;
+            --dark-bg: #121212;
+            --light-bg: #f8f9fa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark-bg);
+            color: white;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Шапка */
+        header {
+            background: linear-gradient(to right, var(--primary-blue), var(--primary-red));
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-icon {
+            font-size: 2.5rem;
+            color: var(--primary-yellow);
+            text-shadow: 3px 3px 0 #000;
+        }
+        
+        .logo-text {
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(to right, var(--primary-yellow), white);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 2px 2px 0 #000;
+        }
+        
+        .logo-subtext {
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            padding: 8px 12px;
+            border-radius: 5px;
+        }
+        
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+        
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+        
+        /* Главный баннер */
+        .hero {
+            padding: 180px 0 100px;
+            background: radial-gradient(circle at top, var(--primary-blue) 0%, var(--dark-bg) 70%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://i.imgur.com/yjQmGtO.png');
+            background-size: 300px;
+            opacity: 0.1;
+            z-index: -1;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--primary-yellow), var(--primary-red));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: #ccc;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(to right, var(--primary-red), var(--primary-blue));
+            color: white;
+            padding: 15px 40px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 50px;
+            margin: 10px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+            border: 3px solid var(--primary-yellow);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        .server-ip {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 15px 30px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-top: 30px;
+            border: 2px dashed var(--primary-yellow);
+        }
+        
+        .server-ip code {
+            font-size: 1.8rem;
+            color: var(--primary-yellow);
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        
+        /* Особенности */
+        .features {
+            padding: 100px 0;
+            background-color: rgba(20, 20, 20, 0.9);
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            color: var(--primary-yellow);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: "";
+            position: absolute;
+            width: 100px;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary-blue), var(--primary-red));
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 5px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-yellow);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--primary-yellow);
+        }
+        
+        /* Режимы игры */
+        .game-modes {
+            padding: 100px 0;
+            background-color: var(--dark-bg);
+        }
+        
+        .modes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+        
+        .mode-card {
+            background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .mode-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 40px rgba(0, 0, 0, 0.5);
+        }
+        
+        .mode-header {
+            padding: 30px;
+            text-align: center;
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .mode-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            z-index: 1;
+        }
+        
+        .mode-header i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: block;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .mode-header span {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .mode-content {
+            padding: 30px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .mode-content p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            color: #ddd;
+        }
+        
+        .mode-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-yellow);
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #aaa;
+            margin-top: 5px;
+        }
+        
+        /* Цвета для режимов */
+        .mode-tournament {
+            background: linear-gradient(to right, #FF416C, #FF4B2B);
+        }
+        
+        .mode-showdown {
+            background: linear-gradient(to right, #4A90E2, #2c5282);
+        }
+        
+        .mode-knockout {
+            background: linear-gradient(to right, #8B4513, #654321);
+        }
+        
+        /* Туториал */
+        .tutorial {
+            padding: 100px 0;
+            background-color: rgba(20, 20, 20, 0.9);
+        }
+        
+        .tutorial-steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .tutorial-step {
+            flex: 1;
+            min-width: 300px;
+            background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .tutorial-step:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--primary-yellow);
+        }
+        
+        .tutorial-step-number {
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(to right, var(--primary-blue), var(--primary-red));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            border: 4px solid var(--dark-bg);
+        }
+        
+        .tutorial-step h3 {
+            font-size: 1.6rem;
+            color: var(--primary-yellow);
+            margin-bottom: 15px;
+            padding-top: 10px;
+        }
+        
+        .tutorial-step p {
+            color: #ddd;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        .tutorial-command {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            color: var(--primary-yellow);
+            margin: 10px 0;
+            border-left: 4px solid var(--primary-blue);
+        }
+        
+        .tutorial-note {
+            background-color: rgba(255, 204, 0, 0.1);
+            border-left: 4px solid var(--primary-yellow);
+            padding: 10px 15px;
+            margin-top: 15px;
+            border-radius: 0 5px 5px 0;
+            font-style: italic;
+        }
+        
+        /* Как начать */
+        .how-to-start {
+            padding: 100px 0;
+            background-color: var(--dark-bg);
+        }
+        
+        .steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .step {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+            padding: 30px 20px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            position: relative;
+        }
+        
+        .step-number {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(to right, var(--primary-blue), var(--primary-red));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            border: 4px solid var(--dark-bg);
+        }
+        
+        /* Донат */
+        .donate-section {
+            padding: 80px 0;
+            background: linear-gradient(to right, var(--primary-blue), var(--primary-red));
+            text-align: center;
+        }
+        
+        .donate-section h2 {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        .donate-section p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .donate-command {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 15px 30px;
+            border-radius: 10px;
+            display: inline-block;
+            font-family: 'Courier New', monospace;
+            font-size: 1.5rem;
+            color: var(--primary-yellow);
+            font-weight: bold;
+            border: 2px dashed var(--primary-yellow);
+            margin-top: 20px;
+        }
+        
+        /* Футер */
+        footer {
+            background-color: #0a0a0a;
+            padding: 60px 0 30px;
+            border-top: 5px solid var(--primary-blue);
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-column h3 {
+            color: var(--primary-yellow);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background-color: #222;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.3rem;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary-blue);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #333;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            nav ul {
+                gap: 15px;
+            }
+            
+            .modes-grid {
+                grid-template-columns: 1fr;
+                max-width: 600px;
+                margin: 0 auto;
+            }
+            
+            .tutorial-steps {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            nav ul {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background-color: rgba(10, 10, 10, 0.95);
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                gap: 0;
+                transform: translateY(-100%);
+                opacity: 0;
+                transition: all 0.3s;
+                z-index: 999;
+            }
+            
+            nav ul.active {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            
+            nav ul li {
+                width: 100%;
+                text-align: center;
+            }
+            
+            nav a {
+                display: block;
+                padding: 15px;
+                border-bottom: 1px solid #333;
+            }
+            
+            .hero {
+                padding: 150px 0 80px;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .tutorial-step {
+                min-width: 100%;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .logo-text {
+                font-size: 1.6rem;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .cta-button {
+                padding: 12px 25px;
+                font-size: 1.1rem;
+            }
+            
+            .server-ip code {
+                font-size: 1.4rem;
+            }
+            
+            .feature-card {
+                padding: 20px;
+            }
+            
+            .mode-header {
+                padding: 20px;
+                font-size: 1.5rem;
+            }
+            
+            .mode-content {
+                padding: 20px;
+            }
+            
+            .tutorial-step {
+                padding: 20px;
+            }
+        }
+        
+        /* Minecraft-стили */
+        .minecraft-block {
+            position: relative;
+            background-color: var(--minecraft-dirt);
+            border: 4px solid;
+            border-color: #6b4c36 #4a3526 #4a3526 #6b4c36;
+            image-rendering: pixelated;
+        }
+        
+        .minecraft-text {
+            font-family: 'Minecraft', monospace;
+            letter-spacing: 1px;
+        }
+        
+        /* Анимации */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        /* Скроллбар */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, var(--primary-blue), var(--primary-red));
+            border-radius: 5px;
+        }
+        
+        /* Бейдж для режима */
+        .mode-badge {
+            display: inline-block;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-top: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <div>
+                        <div class="logo-text">BrawlCraft</div>
+                        <div class="logo-subtext">Brawl Stars в мире Minecraft</div>
+                    </div>
+                </div>
+                
+                <div class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+                
+                <nav>
+                    <ul id="navMenu">
+                        <li><a href="#home">Главная</a></li>
+                        <li><a href="#features">Особенности</a></li>
+                        <li><a href="#modes">Режимы игры</a></li>
+                        <li><a href="#tutorial">Туториал</a></li>
+                        <li><a href="#how-to-start">Как начать</a></li>
+                        <li><a href="#connect">Подключиться</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Главный баннер -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Добро пожаловать в BrawlCraft!</h1>
+            <p>Уникальный Minecraft сервер, где механики Brawl Stars оживают в кубическом мире! Сражайся в эпических битвах, развивай свои навыки и становись чемпионом!</p>
+            
+            <div>
+                <a href="#connect" class="cta-button pulse"><i class="fas fa-gamepad"></i> Играть сейчас</a>
+                <a href="#features" class="cta-button" style="background: linear-gradient(to right, #333, #555);"><i class="fas fa-info-circle"></i> Узнать больше</a>
+            </div>
+            
+            <div class="server-ip">
+                <p>Адрес сервера:</p>
+                <code>brawlcraft.joinserver.ru</code>
+                <p style="margin-top: 10px; color: #ccc; font-size: 0.9rem;">Для игроков из РФ: brawlcraft.mclan.ru</p>
+                <p style="margin-top: 5px; color: #ccc; font-size: 0.9rem;">Версия: 1.16.5</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Особенности -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">Особенности сервера</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3>Три уникальных режима</h3>
+                    <p>Турнир, Шоудаун и Нокаут - каждый режим предлагает уникальный геймплей и испытания для игроков!</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Динамичные бои 1 на 1</h3>
+                    <p>Режим Турнир: очные поединки, где сражаются лучшие из лучших в схватках один на один!</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Активное сообщество</h3>
+                    <p>Присоединяйся к тысячам игроков, которые уже сражаются на сервере и становятся чемпионами!</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h3>Уникальная система</h3>
+                    <p>Специально разработанные плагины воссоздают механики Brawl Stars в мире Minecraft с максимальной точностью!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Режимы игры -->
+    <section class="game-modes" id="modes">
+        <div class="container">
+            <h2 class="section-title">Режимы игры</h2>
+            <div class="modes-grid">
+                <!-- Турнир -->
+                <div class="mode-card">
+                    <div class="mode-header mode-tournament">
+                        <i class="fas fa-trophy"></i>
+                        <span>ТУРНИР</span>
+                        <div class="mode-badge">Очные поединки</div>
+                    </div>
+                    <div class="mode-content">
+                        <p><strong>Турнир на выбывание:</strong> 6-10 игроков сражаются в поединках 1 на 1. Победитель каждого боя проходит в следующий раунд, пока не останется один чемпион!</p>
+                        <p>Это режим для истинных мастеров дуэлей. Здесь нет команд - только ты и твой противник. Каждый раунд - это новая битва, новый соперник и новый шанс доказать, что ты лучший. Прояви все свои навыки, чтобы дойти до финала и забрать главный приз!</p>
+                        <div class="mode-stats">
+                            <div class="stat">
+                                <span class="stat-value">1×1</span>
+                                <span class="stat-label">Поединок</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">6-10</span>
+                                <span class="stat-label">Игроков</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">1</span>
+                                <span class="stat-label">Победитель</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Шоудаун -->
+                <div class="mode-card">
+                    <div class="mode-header mode-showdown">
+                        <i class="fas fa-crosshairs"></i>
+                        <span>ШОУДАУН</span>
+                        <div class="mode-badge">Королевская битва</div>
+                    </div>
+                    <div class="mode-content">
+                        <p>Королевская битва на выживание! 10 игроков сражаются на одной арене, и победителем становится последний выживший.</p>
+                        <p>Режим Шоудаун проверяет твои индивидуальные навыки и способность выживать в сложных условиях. Собирай усиления на карте, избегай опасных зон и перехитри всех противников!</p>
+                        <div class="mode-stats">
+                            <div class="stat">
+                                <span class="stat-value">10</span>
+                                <span class="stat-label">Игроков</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">1</span>
+                                <span class="stat-label">Победитель</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">8</span>
+                                <span class="stat-label">Минут</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Нокаут -->
+                <div class="mode-card">
+                    <div class="mode-header mode-knockout">
+                        <i class="fas fa-fist-raised"></i>
+                        <span>НОКАУТ</span>
+                        <div class="mode-badge">Командные бои</div>
+                    </div>
+                    <div class="mode-content">
+                        <p>Интенсивные бои на выбывание! Проиграл один раунд - выбываешь из матча. Только самые стойкие дойдут до конца.</p>
+                        <p>В режиме Нокаут нет права на ошибку. Каждый раунд решает твою судьбу. Прояви хладнокровие, точность и решительность, чтобы выбить всех соперников и завоевать победу!</p>
+                        <div class="mode-stats">
+                            <div class="stat">
+                                <span class="stat-value">2×2</span>
+                                <span class="stat-label">Команда</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">3</span>
+                                <span class="stat-label">Выбывания</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">7</span>
+                                <span class="stat-label">Минут</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Туториал -->
+    <section class="tutorial" id="tutorial">
+        <div class="container">
+            <h2 class="section-title">Туториал для новичков</h2>
+            <p style="text-align: center; color: #ccc; font-size: 1.2rem; max-width: 800px; margin: 0 auto 50px;">
+                Воспользуйтесь этим руководством, чтобы быстро освоиться на сервере и начать выживать!
+            </p>
+            
+            <div class="tutorial-steps">
+                <div class="tutorial-step">
+                    <div class="tutorial-step-number">1</div>
+                    <h3>Начало выживания</h3>
+                    <p>Чтобы начать выживать, телепортируйтесь на шахту:</p>
+                    <div class="tutorial-command">/warp mine</div>
+                    <p>Около шахты есть сундуки с кит-стартом. Возьмите его и идите копайте кристалы и гемы.</p>
+                </div>
+                
+                <div class="tutorial-step">
+                    <div class="tutorial-step-number">2</div>
+                    <h3>Сдача ресурсов</h3>
+                    <p>Чтобы сдать собранные кристалы и гемы, телепортируйтесь в банк:</p>
+                    <div class="tutorial-command">/warp bank</div>
+                    <p>В банке вы можете обменять добытые ресурсы на игровую валюту и привилегии.</p>
+                </div>
+                
+                <div class="tutorial-step">
+                    <div class="tutorial-step-number">3</div>
+                    <h3>Фарм ресурсов</h3>
+                    <p>Для эффективного фарма снега используйте специальную локацию:</p>
+                    <div class="tutorial-command">/warp snow</div>
+                    <p>Это автоматическая ферма снега, где вы можете быстро набрать нужные ресурсы.</p>
+                </div>
+                
+                <div class="tutorial-step">
+                    <div class="tutorial-step-number">4</div>
+                    <h3>Телепортации</h3>
+                    <p>Чтобы телепортироваться в разные города и локации:</p>
+                    <div class="tutorial-command">/warp portals</div>
+                    <p>Используйте порталы для быстрого перемещения по миру сервера.</p>
+                </div>
+                
+                <div class="tutorial-step">
+                    <div class="tutorial-step-number">5</div>
+                    <h3>Система доната</h3>
+                    <p>Чтобы посмотреть список доступных донатов и их преимущества:</p>
+                    <div class="tutorial-command">/donate</div>
+                    <div class="tutorial-note">
+                        Донат даёт свой уникальный набор возможностей, эксклюзивный префикс в табе, чате и скорборде, а также уважение от игроков.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Как начать -->
+    <section class="how-to-start" id="how-to-start">
+        <div class="container">
+            <h2 class="section-title">Как начать играть?</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Установи Minecraft</h3>
+                    <p>Убедись, что у тебя установлена версия Minecraft Java Edition 1.16.5.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Подключись к серверу</h3>
+                    <p>В меню Minecraft выбери "Сеть", затем "Добавить сервер" и введи адрес сервера.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Выбери режим</h3>
+                    <p>После входа на сервер, открой меню и выбери понравившийся режим игры.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Начни играть</h3>
+                    <p>Присоединяйся к играм, развивай свои навыки и побеждай в рейтинговых матчах!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Донат -->
+    <section class="donate-section">
+        <div class="container">
+            <h2>Хочешь получить преимущества?</h2>
+            <p>Приобретите донат, чтобы получить уникальные возможности, эксклюзивный префикс и особый статус на сервере!</p>
+            <p>Используйте команду в игре, чтобы увидеть все доступные варианты доната:</p>
+            <div class="donate-command">/donate</div>
+        </div>
+    </section>
+
+    <!-- Подключиться -->
+    <section class="hero" id="connect" style="padding: 80px 0; background: radial-gradient(circle at bottom, var(--primary-red) 0%, var(--dark-bg) 70%);">
+        <div class="container">
+            <h2>Готов к битве?</h2>
+            <p style="margin-bottom: 30px;">Присоединяйся к тысячам игроков, которые уже сражаются на сервере BrawlCraft!</p>
+            
+            <div class="server-ip" style="margin-top: 0;">
+                <p>Адрес сервера:</p>
+                <code>brawlcraft.joinserver.ru</code>
+                <p style="margin-top: 10px; color: #ccc; font-size: 0.9rem;">Для игроков из РФ: brawlcraft.mclan.ru</p>
+                <p style="margin-top: 5px; color: #ccc; font-size: 0.9rem;">Версия: 1.16.5</p>
+            </div>
+            
+            <!-- ОСТАЛАСЬ ТОЛЬКО ОДНА КНОПКА "ПОМОЩЬ" -->
+            <div style="margin-top: 40px;">
+                <a href="faq.html" class="cta-button" style="background: linear-gradient(to right, #333, #555);"><i class="fas fa-question-circle"></i> Помощь</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>BrawlCraft</h3>
+                    <p>Лучший сервер, сочетающий механики Brawl Stars и Minecraft. Присоединяйся к нашему сообществу!</p>
+                    <div class="social-links">
+                        <a href="https://www.youtube.com/@BrawlCraftOfficial" target="_blank" title="YouTube канал BrawlCraft">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="https://t.me/BrawlCraft2026" target="_blank" title="Telegram канал BrawlCraft">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Быстрые ссылки</h3>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 10px;"><a href="#home" style="color: #ccc; text-decoration: none;">Главная</a></li>
+                        <li style="margin-bottom: 10px;"><a href="#features" style="color: #ccc; text-decoration: none;">Особенности</a></li>
+                        <li style="margin-bottom: 10px;"><a href="#modes" style="color: #ccc; text-decoration: none;">Режимы игры</a></li>
+                        <li style="margin-bottom: 10px;"><a href="#tutorial" style="color: #ccc; text-decoration: none;">Туториал</a></li>
+                        <li style="margin-bottom: 10px;"><a href="#how-to-start" style="color: #ccc; text-decoration: none;">Как начать</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Помощь</h3>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 10px;"><a href="faq.html" style="color: #ccc; text-decoration: none;">Частые вопросы</a></li>
+                        <li style="margin-bottom: 10px;"><a href="rules.html" style="color: #ccc; text-decoration: none;">Правила сервера</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2026 BrawlCraft. Все права защищены. Этот сервер не аффилирован с Mojang Studios или Supercell.</p>
+                <p>Minecraft и Brawl Stars являются товарными знаками соответствующих правообладателей.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Мобильное меню
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.getElementById('navMenu').classList.toggle('active');
+        });
+        
+        // Закрытие меню при клике на ссылку
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('navMenu').classList.remove('active');
+            });
+        });
+        
+        // Плавная прокрутка
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Анимация появления элементов при скролле
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Наблюдаем за элементами
+        document.querySelectorAll('.feature-card, .mode-card, .tutorial-step, .step').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(el);
+        });
+        
+        // Обновление онлайн-игроков (заглушка)
+        function updateOnlinePlayers() {
+            const onlineElement = document.querySelector('.fa-server');
+            if (onlineElement) {
+                const parent = onlineElement.parentElement;
+                const currentOnline = parseInt(parent.textContent.match(/\d+/)[0]);
+                const newOnline = currentOnline + Math.floor(Math.random() * 21) - 10;
+                const finalOnline = Math.max(800, Math.min(2000, newOnline));
+                
+                parent.innerHTML = `<i class="fas fa-server"></i> Онлайн: ${finalOnline}/2000`;
+            }
+        }
+        
+        // Обновляем онлайн каждые 30 секунд
+        setInterval(updateOnlinePlayers, 30000);
+    </script>
+</body>
+</html>
